@@ -4,18 +4,13 @@ let today = document.querySelector("#currentDay");
 let userInputSpan = document.querySelector("#user-input");
 let day = document.querySelector("#currentDay");
 let now = moment().format('MMMM Do YYYY, h:mm:ss a');
-console.log(now)
+console.log(now);
 
-// let timeIds = ["#8", "#9", "#10"];
-
-// let timesObject = { 
-//     "8:00am" : 
-
-// }
 
 
 displayDailyTask();
 displayCurrentDateTime();
+updateColor();
 
 // Logs the users input
 function logTask() {
@@ -34,37 +29,44 @@ function displayDailyTask() {
     $("#10").val(localStorage.getItem("hour10"))
     $("#11").val(localStorage.getItem("hour11"))
     $("#12").val(localStorage.getItem("hour12"))
-    $("#1").val(localStorage.getItem("hour1"))
-    $("#2").val(localStorage.getItem("hour2"))
-    $("#3").val(localStorage.getItem("hour3"))
-    $("#4").val(localStorage.getItem("hour4"))
-    $("#5").val(localStorage.getItem("hour5"))
- 
+    $("#13").val(localStorage.getItem("hour1"))
+    $("#14").val(localStorage.getItem("hour2"))
+    $("#15").val(localStorage.getItem("hour3"))
+    $("#16").val(localStorage.getItem("hour4"))
+    $("#17").val(localStorage.getItem("hour5"))
+
 }
 
 // Display current date and time at the top of the page
 function displayCurrentDateTime() {
     $("#currentDay").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
     setInterval(displayCurrentDateTime, 1000)
-} 
+}
 
-// function updateColor() {
-//     let hour = 
+function updateColor() {
+    let currentTime = moment().hours()
+    console.log(currentTime)
+    
+    $(".time-block").each(function () {
+        console.log($(this))
+        let timeId = parseInt($(this).attr("id"))
+        console.log(timeId)
 
-//     let time = moment(hour)
-//     console.log (time)
+        if (timeId < currentTime) {
+            $(this).addClass("past")
+        } else if (timeId === currentTime) {
+            $(this).removeClass("past")
+            $(this).addClass("present")
+        }
+        if (timeId > currentTime) {
+            $(this).removeClass("past")
+            $(this).removeClass("present")
+            $(this).addClass("future")
+        }
 
-//     // if (moment().isAfter()) {
-//     //     .addClass(".past")
-//     // } else if (moment().isBefore()) {
-//     //     .addClass(".future")
-//     // } else {
-//     //     .addClass(".present")
-//     // }
+    });
+}
 
-// make sure to remove classes 
-
-// }
 
 $(document).on("click", ".saveBtn", logTask);
 
