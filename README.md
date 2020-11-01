@@ -26,5 +26,8 @@ function logTask() {
         <button class="saveBtn"><i class="fas fa-2x fa-save"></i></button>
       </div>
 
+## Deployed Application ##
+https://jordonmoses.github.io/Day-Planner/
+
 
 
